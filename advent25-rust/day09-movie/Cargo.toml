@@ -1,5 +1,5 @@
 [package]
-name = "day9-movie"
+name = "day09-movie"
 version = "0.1.0"
 edition = "2024"
 
