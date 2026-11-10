@@ -1,6 +1,7 @@
 package day01
 
 import (
+	"bufio"
 	"fmt"
 	"math"
 	"slices"
@@ -19,8 +20,9 @@ func getDistribution(numbers []int) map[int]int {
 func parseInput(input string) ([]int, []int) {
 	var first []int
 	var second []int
-	for line := range strings.Lines(input) {
-		vals := strings.Fields(line)
+	scanner := bufio.NewScanner(strings.NewReader(input))
+	for scanner.Scan() {
+		vals := strings.Fields(scanner.Text())
 		left, err := strconv.Atoi(vals[0])
 		if err != nil {
 			fmt.Println("Could not parse integer:", left)
