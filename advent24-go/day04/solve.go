@@ -25,7 +25,6 @@ func SolvePartOne(input string) int {
 						curr_row = curr_row + delta[0]
 						curr_col = curr_col + delta[1]
 						if curr_row >= 0 && curr_row < num_rows && curr_col >= 0 && curr_col < num_cols && lines[curr_row][curr_col] == target[idx] {
-							// fmt.Println("Found", string(target[idx]))
 							if idx == len(target)-1 {
 								total += 1
 							}
