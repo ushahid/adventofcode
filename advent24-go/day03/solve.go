@@ -16,7 +16,7 @@ func SolvePartOne(input string) int {
 			left, err_left := strconv.Atoi(expr[1])
 			right, err_right := strconv.Atoi(expr[2])
 			if err_left != nil || err_right != nil {
-				fmt.Println("Parsing error")
+				fmt.Println("Numerical parsing error")
 			}
 			sum += left * right
 		}
@@ -39,7 +39,7 @@ func SolvePartTwo(input string) int {
 				left, err_left := strconv.Atoi(expr[1])
 				right, err_right := strconv.Atoi(expr[2])
 				if err_left != nil || err_right != nil {
-					fmt.Println("Parsing error")
+					fmt.Println("Numerical parsing error")
 				}
 				sum += left * right
 			}
