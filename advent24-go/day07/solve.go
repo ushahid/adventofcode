@@ -34,9 +34,6 @@ func parseInput(input string) ([]int, [][]int) {
 }
 
 func concat(a int, b int) int {
-	// if b == 0 {
-	// 	return a
-	// }
 	val, _ := strconv.Atoi(strconv.Itoa(a) + strconv.Itoa(b))
 	return val
 }
@@ -45,7 +42,6 @@ func possiblyTrueOne(target int, inputs []int, current int) bool {
 	if current > target {
 		return false
 	}
-
 	if len(inputs) == 1 {
 		return (inputs[0]+current == target) || (inputs[0]*current == target)
 	}
@@ -56,13 +52,12 @@ func possiblyTrueTwo(target int, inputs []int, current int) bool {
 	if current > target {
 		return false
 	}
-
 	if len(inputs) == 1 {
 		return (inputs[0]+current == target) || (inputs[0]*current == target) || (concat(current, inputs[0]) == target)
 	}
-	return (possiblyTrueTwo(target, inputs[1:], inputs[0]+current) ||
+	return possiblyTrueTwo(target, inputs[1:], inputs[0]+current) ||
 		possiblyTrueTwo(target, inputs[1:], inputs[0]*current) ||
-		possiblyTrueTwo(target, inputs[1:], concat(current, inputs[0])))
+		possiblyTrueTwo(target, inputs[1:], concat(current, inputs[0]))
 }
 
 func SolvePartOne(input string) int {
