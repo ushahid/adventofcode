@@ -1,7 +1,6 @@
 package day09
 
 import (
-	"strconv"
 	"strings"
 )
 
@@ -14,21 +13,21 @@ type Free struct {
 }
 
 func parseInput(input string) ([]File, []Free) {
-	var files []File
-	var free []Free
+	files := make([]File, 0, (len(input)+1)/2)
+	free := make([]Free, 0, len(input)/2)
 	input = strings.TrimSpace(input)
 	pos := 0
 	fileId := 0
 	for idx := 0; idx < len(input)-1; idx += 2 {
-		size, _ := strconv.Atoi(string(input[idx]))
-		space, _ := strconv.Atoi(string(input[idx+1]))
+		size := int(input[idx] - '0')
+		space := int(input[idx+1] - '0')
 		files = append(files, File{fileId, pos, size})
 		pos += size
 		free = append(free, Free{pos, space})
 		pos += space
 		fileId++
 	}
-	size, _ := strconv.Atoi(string(input[len(input)-1]))
+	size := int(input[len(input)-1] - '0')
 	files = append(files, File{fileId, pos, size})
 	return files, free
 }
