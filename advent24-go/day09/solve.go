@@ -1,6 +1,7 @@
 package day09
 
 import (
+	"slices"
 	"strings"
 )
 
@@ -23,8 +24,10 @@ func parseInput(input string) ([]File, []Free) {
 		space := int(input[idx+1] - '0')
 		files = append(files, File{fileId, pos, size})
 		pos += size
-		free = append(free, Free{pos, space})
-		pos += space
+		if space > 0 {
+			free = append(free, Free{pos, space})
+			pos += space
+		}
 		fileId++
 	}
 	size := int(input[len(input)-1] - '0')
@@ -98,6 +101,33 @@ func SolvePartOne(input string) int {
 	return checksum
 }
 
+func findIdx(frees []Free, fileSize int, filestart int) int {
+	for j, f := range frees {
+		if f.start >= filestart {
+			break
+		}
+		if f.size >= fileSize {
+			return j
+		}
+	}
+	return -1
+}
+
 func SolvePartTwo(input string) int {
-	return 0
+	files, frees := parseInput(input)
+	checksum := 0
+	for i := len(files) - 1; i >= 0; i-- {
+		freeIdx := findIdx(frees, files[i].size, files[i].start)
+		if freeIdx != -1 {
+			checksum += getChecksum(files[i].id, frees[freeIdx].start, files[i].size)
+			frees[freeIdx].start += files[i].size
+			frees[freeIdx].size -= files[i].size
+			if frees[freeIdx].size == 0 {
+				frees = slices.Delete(frees, freeIdx, freeIdx+1)
+			}
+		} else {
+			checksum += getChecksum(files[i].id, files[i].start, files[i].size)
+		}
+	}
+	return checksum
 }
