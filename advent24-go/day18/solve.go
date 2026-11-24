@@ -80,7 +80,6 @@ func SolvePartTwo(input string) int {
 		shortest := findShortest(grid)
 		if shortest == -1 {
 			return corruptPos[i].row*100 + corruptPos[i].col
-			break
 		}
 	}
 	return 0
