@@ -86,13 +86,13 @@ func countCheats(t Track, maxCheat int, minSave int) int {
 			remCol := maxCheat - absDeltaRow
 
 			for deltaCol := -remCol; deltaCol <= remCol; deltaCol++ {
-				c2 := currPos.col + deltaCol
-				if c2 < 0 || c2 >= t.cols {
+				testCol := currPos.col + deltaCol
+				if testCol < 0 || testCol >= t.cols {
 					continue
 				}
 
-				d2 := t.dist[t.idx(testRow, c2)]
-				if d2 == -1 {
+				finalDist := t.dist[t.idx(testRow, testCol)]
+				if finalDist == -1 {
 					continue
 				}
 
@@ -101,7 +101,7 @@ func countCheats(t Track, maxCheat int, minSave int) int {
 					absDeltaCol = -absDeltaCol
 				}
 				cheatLen := absDeltaRow + absDeltaCol
-				saved := (d2 - dist) - cheatLen
+				saved := (finalDist - dist) - cheatLen
 
 				if saved >= minSave {
 					total++
